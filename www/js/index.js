@@ -32,6 +32,9 @@ var app = {
     document.addEventListener('deviceready', this.onDeviceReady, false);
   },
 
+  alertDismissed: function() {
+  },
+
   tokenHandler: function(token) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might token to send it the token for later use.
@@ -48,7 +51,7 @@ var app = {
 
   onNotificationAPN: function(event) {
     if(event.alert) {
-      navigator.notification.alert(event.alert);
+      navigator.notification.alert(event.alert, app.alertDismissed);
     }
 
     if(event.sound) {
@@ -57,7 +60,8 @@ var app = {
     }
 
     if(event.badge) {
-      pushNotification.setApplicationIconBadgeNumber(app.successHandler, app.errorHandler, event.badge);
+//      pushNotification.setApplicationIconBadgeNumber(app.successHandler, app.errorHandler, event.badge);
+      pushNotification.setApplicationIconBadgeNumber(app.successHandler, event.badge);
     }
   },
 
