@@ -72,6 +72,9 @@ var app = {
   onDeviceReady: function() {
     app.receivedEvent('deviceready');
 
+//    test navigator.notification.alert
+    navigator.notification.alert('foo monkey!', app.alertDismissed);
+
     pushNotification = window.plugins.pushNotification;
 
     pushNotification.register(
