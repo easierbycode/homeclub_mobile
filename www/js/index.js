@@ -35,7 +35,7 @@ var app = {
   tokenHandler: function(token) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might token to send it the token for later use.
-    alert('device token = ' + result);
+    alert('device token = ' + token);
   },
 
   errorHandler: function(error) {
