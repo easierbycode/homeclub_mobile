@@ -60,8 +60,31 @@ var app = {
     }
 
     if(event.badge) {
-//      pushNotification.setApplicationIconBadgeNumber(app.successHandler, app.errorHandler, event.badge);
       pushNotification.setApplicationIconBadgeNumber(app.successHandler, event.badge);
+    }
+  },
+  
+  // callback for all GCM events
+  onNotificationGCM: function(e) {
+    switch(e.event) {
+      case 'registered':
+        if(e.regid.length > 0) {
+          app.tokenHandler(e.regid);
+        }
+        break;
+        
+      case 'message':
+        // getMessageFromServer();
+        alert('new message on server');
+        break;
+        
+      case 'error':
+        alert('GCM error: ' + e.msg);
+        break;
+        
+      default:
+        alert('An unknown GCM event has occured');
+        break;
     }
   },
 
@@ -72,21 +95,31 @@ var app = {
   onDeviceReady: function() {
     app.receivedEvent('deviceready');
 
-//    test navigator.notification.alert
-    navigator.notification.alert('foo monkey!', app.alertDismissed);
-
     pushNotification = window.plugins.pushNotification;
 
-    pushNotification.register(
-      app.tokenHandler,
-      app.errorHandler,
-      {
-        "badge":"true",
-        "sound":"true",
-        "alert":"true",
-        "ecb":"app.onNotificationAPN"
-      }
-    )
+    if(device.platform == 'iOS') {
+      pushNotification.register(
+        app.tokenHandler,
+        app.errorHandler,
+        {
+          "badge":"true",
+          "sound":"true",
+          "alert":"true",
+          "ecb":"app.onNotificationAPN"
+        }
+      )
+    } else {
+      pushNotification.register(
+        function(id) {
+          alert('sent GCM registration request');
+        },
+        app.errorHandler,
+        {
+          "senderID":"125902103424",
+          "ecb":"app.onNotificationGCM"
+        }
+      )
+    }
   },
   // Update DOM on a Received Event
   receivedEvent: function(id) {
