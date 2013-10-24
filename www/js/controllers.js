@@ -5,18 +5,30 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $resource, Phonegap
   window.foo = 'monkey';
   
   var Device = $resource('http://alerts.homeclub.us/devices');
+  
+  $scope.token = undefined;
 
   $scope.alertDismissed = function() {
   };
   
   $scope.createDevice = function(token) {
+
+    alert('token: ' + token);    
+    $scope.token = token;
+    
     var attrs = angular.extend(device, {
       token: token
     });
     
     var newDevice = new Device(attrs);
     
-    newDevice.$save();  
+    newDevice.$save(function(d, putResponseHeaders) {
+      //d => saved device object
+      //putResponseHeaders => $http header getter
+      
+      console.log(d);
+      console.log(putResponseHeaders);
+    }); 
   };
 
   $scope.apnSuccessfulRegistration = function(token) {
@@ -74,18 +86,6 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $resource, Phonegap
   
   $scope.gcmSuccessfulRegistration = function(id) {
   };
-  
-  // Update DOM on a Received Event
-  $scope.receivedEvent = function(id) {
-    var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
-
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-
-    console.log('Received Event: ' + id);
-  };
 
   // $document.addEventListener('deviceready', function() {
   PhonegapService.ready.then(function() {
@@ -94,8 +94,6 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $resource, Phonegap
     pushNotification = window.plugins.pushNotification;
 
     if(device.platform == 'iOS') {
-      
-      alert('... iOS device detected');
       
       pushNotification.register(
         $scope.apnSuccessfulRegistration,
