@@ -2,7 +2,7 @@ window.pushNotification = undefined;
 
 var pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource');
 
-pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource) {
+pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource, phonegapReady) {
   
   var Device = $resource('http://alerts.homeclub.us/devices');
 
@@ -87,7 +87,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
     console.log('Received Event: ' + id);
   };
 
-  $document.addEventListener('deviceready', function() {
+  // $document.addEventListener('deviceready', function() {
     $scope.receivedEvent('deviceready');
     
     pushNotification = window.plugins.pushNotification;
@@ -113,5 +113,5 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
         }
       )
     }
-  });
+  // });
 });
