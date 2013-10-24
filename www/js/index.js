@@ -1,57 +1,41 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-
 window.pushNotification = undefined;
 
-var app = {
-  // Application Constructor
-  initialize: function() {
-    this.bindEvents();
-  },
-  // Bind Event Listeners
-  //
-  // Bind any events that are required on startup. Common events are:
-  // 'load', 'deviceready', 'offline', and 'online'.
-  bindEvents: function() {
-    document.addEventListener('deviceready', this.onDeviceReady, false);
-  },
+var pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource', 'fsCordova');
 
-  alertDismissed: function() {
-  },
+pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource, CordovaService) {
+  
+  var Device = $resource('http://alerts.homeclub.us/devices');
 
-  tokenHandler: function(token) {
+  $scope.alertDismissed = function() {
+  };
+  
+  $scope.createDevice = function(token) {
+    var attrs = angular.extend(device, {
+      token: token
+    });
+    
+    var newDevice = new Device(attrs);
+    
+    newDevice.$save();  
+  };
+
+  $scope.apnSuccessfulRegistration = function(token) {
     // Your iOS push server needs to know the token before it can push to this device
     // here is where you might token to send it the token for later use.
-    alert('device token = ' + token);
-  },
+    $scope.createDevice(token);
+  };
 
-  errorHandler: function(error) {
+  $scope.errorHandler = function(error) {
     alert('error = ' + error);
-  },
+  };
 
-  successHandler: function(result) {
+  $scope.successHandler = function(result) {
     alert('result = ' + result);
-  },
+  };
 
-  onNotificationAPN: function(event) {
+  $scope.onNotificationAPN = function(event) {
     if(event.alert) {
-      navigator.notification.alert(event.alert, app.alertDismissed);
+      navigator.notification.alert(event.alert, $scope.alertDismissed);
     }
 
     if(event.sound) {
@@ -60,16 +44,16 @@ var app = {
     }
 
     if(event.badge) {
-      pushNotification.setApplicationIconBadgeNumber(app.successHandler, event.badge);
+      pushNotification.setApplicationIconBadgeNumber($scope.successHandler, event.badge);
     }
-  },
+  };
   
   // callback for all GCM events
-  onNotificationGCM: function(e) {
+  $scope.onNotificationGCM = function(e) {
     switch(e.event) {
       case 'registered':
         if(e.regid.length > 0) {
-          app.tokenHandler(e.regid);
+          $scope.createDevice(e.regid);
         }
         break;
         
@@ -86,43 +70,13 @@ var app = {
         alert('An unknown GCM event has occured');
         break;
     }
-  },
-
-  // deviceready Event Handler
-  //
-  // The scope of 'this' is the event. In order to call the 'receivedEvent'
-  // function, we must explicity call 'app.receivedEvent(...);'
-  onDeviceReady: function() {
-    app.receivedEvent('deviceready');
-
-    pushNotification = window.plugins.pushNotification;
-
-    if(device.platform == 'iOS') {
-      pushNotification.register(
-        app.tokenHandler,
-        app.errorHandler,
-        {
-          "badge":"true",
-          "sound":"true",
-          "alert":"true",
-          "ecb":"app.onNotificationAPN"
-        }
-      )
-    } else {
-      pushNotification.register(
-        function(id) {
-          alert('sent GCM registration request');
-        },
-        app.errorHandler,
-        {
-          "senderID":"125902103424",
-          "ecb":"app.onNotificationGCM"
-        }
-      )
-    }
-  },
+  };
+  
+  $scope.gcmSuccessfulRegistration = function(id) {
+  };
+  
   // Update DOM on a Received Event
-  receivedEvent: function(id) {
+  $scope.receivedEvent = function(id) {
     var parentElement = document.getElementById(id);
     var listeningElement = parentElement.querySelector('.listening');
     var receivedElement = parentElement.querySelector('.received');
@@ -131,5 +85,33 @@ var app = {
     receivedElement.setAttribute('style', 'display:block;');
 
     console.log('Received Event: ' + id);
-  }
-};
+  };
+
+  CordovaService.ready.then(function() {
+    $scope.receivedEvent('deviceready');
+    
+    $scope.pushNotification = window.plugins.pushNotification;
+
+    if(device.platform == 'iOS') {
+      pushNotification.register(
+        $scope.apnSuccessfulRegistration,
+        $scope.errorHandler,
+        {
+          "badge":"true",
+          "sound":"true",
+          "alert":"true",
+          "ecb":"$scope.onNotificationAPN"
+        }
+      )
+    } else {
+      pushNotification.register(
+        $scope.gcmSuccessfulRegistration,
+        $scope.errorHandler,
+        {
+          "senderID":"125902103424",
+          "ecb":"$scope.onNotificationGCM"
+        }
+      )
+    }
+  });
+});
