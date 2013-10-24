@@ -1,8 +1,8 @@
 window.pushNotification = undefined;
 
-var pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource', 'fsCordova');
+var pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource');
 
-pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource, CordovaService) {
+pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource) {
   
   var Device = $resource('http://alerts.homeclub.us/devices');
 
@@ -87,7 +87,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
     console.log('Received Event: ' + id);
   };
 
-  CordovaService.ready.then(function() {
+  document.addEventListener('deviceready', function() {
     $scope.receivedEvent('deviceready');
     
     pushNotification = window.plugins.pushNotification;
