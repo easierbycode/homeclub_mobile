@@ -90,7 +90,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
   CordovaService.ready.then(function() {
     $scope.receivedEvent('deviceready');
     
-    $scope.pushNotification = window.plugins.pushNotification;
+    pushNotification = window.plugins.pushNotification;
 
     if(device.platform == 'iOS') {
       pushNotification.register(
