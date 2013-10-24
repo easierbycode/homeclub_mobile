@@ -4,11 +4,18 @@ window.pushCallbacks = {
   errorHandler: function(error) { alert('error: ' + error) },
   
   sendTokenToServer: function(token) {
-    var params = angular.extend(device, {
+    var deviceAttrs = angular.extend(device, {
       token: token
     });
     
-    alert(JSON.stringify(params));
+    // get angular $scope
+    var scope = angular.element(document.body).scope();
+    
+    scope.$apply(function() {
+      scope.token = token;
+      
+      scope.createDevice(deviceAttrs);
+    });
   },
   
   successHandler: function(result) { alert('result: ' + result) }
