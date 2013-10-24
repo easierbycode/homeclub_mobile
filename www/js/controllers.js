@@ -1,15 +1,13 @@
-pushNotificationApp.controller('IndexCtrl', function($resource, $scope, PhonegapService) {
+pushNotificationApp.controller('IndexCtrl', function($scope, DeviceRestangular, PhonegapService) {
   
   $scope.token = undefined;
   
   $scope.createDevice = function(deviceAttrs) {
-    var Device = $resource('http://alerts.homeclub.us/devices');
     
-    var newDevice = new Device(deviceAttrs);
+    alert(JSON.stringify(deviceAttrs));
     
-    newDevice.$save(function(d, respHeaders) {
-      alert('savedDevice: ' + JSON.stringify(d));
-      alert('resp: ' + JSON.stringify(respHeaders));
+    DeviceRestangular.all('devices').post(deviceAttrs).then(function(device) {
+      alert(JSON.stringify(device));
     })
   };
 
