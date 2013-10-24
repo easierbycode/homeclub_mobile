@@ -1,8 +1,10 @@
 window.pushNotification = undefined;
 
-var pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource');
-
 pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource, phonegapReady) {
+  
+  console.log('.. inside IndexCtrl');
+  
+  window.foo = 'monkey';
   
   var Device = $resource('http://alerts.homeclub.us/devices');
 
