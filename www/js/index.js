@@ -1,6 +1,8 @@
 window.pushNotification = undefined;
 
-pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resource, phonegapReady) {
+window.pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource');
+
+pushNotificationApp.controller('IndexCtrl', function($scope, $resource) {
   
   console.log('.. inside IndexCtrl');
   
@@ -95,6 +97,9 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
     pushNotification = window.plugins.pushNotification;
 
     if(device.platform == 'iOS') {
+      
+      alert('... iOS device detected');
+      
       pushNotification.register(
         $scope.apnSuccessfulRegistration,
         $scope.errorHandler,
