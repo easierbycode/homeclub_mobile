@@ -87,7 +87,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $document, $resourc
     console.log('Received Event: ' + id);
   };
 
-  document.addEventListener('deviceready', function() {
+  $document.addEventListener('deviceready', function() {
     $scope.receivedEvent('deviceready');
     
     pushNotification = window.plugins.pushNotification;
