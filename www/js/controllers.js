@@ -1,8 +1,4 @@
-window.pushNotification = undefined;
-
-window.pushNotificationApp = angular.module('pushNotificationApp', 'ng-resource');
-
-pushNotificationApp.controller('IndexCtrl', function($scope, $resource) {
+pushNotificationApp.controller('IndexCtrl', function($scope, $resource, PhonegapService) {
   
   console.log('.. inside IndexCtrl');
   
@@ -92,6 +88,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $resource) {
   };
 
   // $document.addEventListener('deviceready', function() {
+  PhonegapService.ready.then(function() {
     $scope.receivedEvent('deviceready');
     
     pushNotification = window.plugins.pushNotification;
@@ -120,5 +117,5 @@ pushNotificationApp.controller('IndexCtrl', function($scope, $resource) {
         }
       )
     }
-  // });
+  });
 });
