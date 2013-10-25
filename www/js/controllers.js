@@ -1,14 +1,9 @@
-pushNotificationApp.controller('IndexCtrl', function($scope, DeviceRestangular, PhonegapService) {
+pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService) {
   
   $scope.token = undefined;
   
   $scope.createDevice = function(deviceAttrs) {
-    
     alert(JSON.stringify(deviceAttrs));
-    
-    DeviceRestangular.all('devices').post(deviceAttrs).then(function(device) {
-      alert(JSON.stringify(device));
-    })
   };
 
   PhonegapService.ready.then(function() {
