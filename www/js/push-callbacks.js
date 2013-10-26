@@ -1,24 +1,19 @@
 window.pushCallbacks = {
   alertDismissed: function() {},
   
+  successHandler: function(result) { alert('result: ' + result) },
+  
   errorHandler: function(error) { alert('error: ' + error) },
   
-  sendTokenToServer: function(token) {
-    var deviceAttrs = angular.extend(device, {
-      token: token
-    });
-    
+  sendTokenToServer: function(platform, token) {
     // get angular $scope
     var scope = angular.element(document.body).scope();
+    var postUrl = 'http://alerts.homeclub.us/devices?platform=' + platform + '&token=' + token
     
-    scope.$apply(function() {
-      scope.token = token;
-      
-      scope.createDevice(deviceAttrs);
-    });
-  },
-  
-  successHandler: function(result) { alert('result: ' + result) }
+    scope.$apply(function() { scope.token = token; });
+    
+    jx.load(postUrl, pushCallbacks.successHandler, "json", "POST");
+  }
 };
 
 
@@ -39,7 +34,7 @@ pushCallbacks.APN = {
   },
   
   successfulRegistration: function(token) {
-    pushCallbacks.sendTokenToServer(token);
+    pushCallbacks.sendTokenToServer('iPhone', token);
   }
 };
   
@@ -51,7 +46,7 @@ pushCallbacks.GCM = {
         var token = e.regid;
         
         if(token.length) {
-          pushCallbacks.sendTokenToServer(token);
+          pushCallbacks.sendTokenToServer('Android', token);
         }
         break;
         
