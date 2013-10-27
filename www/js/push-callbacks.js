@@ -1,3 +1,5 @@
+window.fooUrl = undefined;
+
 window.pushCallbacks = {
   alertDismissed: function() {},
   
@@ -8,7 +10,9 @@ window.pushCallbacks = {
   sendTokenToServer: function(platform, token) {
     // get angular $scope
     var scope = angular.element(document.body).scope();
-    var postUrl = 'http://alerts.homeclub.us/devices?platform=' + platform + '&token=' + token
+    var postUrl = 'http://alerts.homeclub.us/devices?platform=' + platform + '&token=' + token;
+    
+    window.fooUrl = url;
     
     scope.$apply(function() { scope.token = token; });
     
