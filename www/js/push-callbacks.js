@@ -1,11 +1,8 @@
 function post(url, params) {
   var req = new XMLHttpRequest();
   req.open('POST', url);
-  req.onreadystatechange = function(evt) {
-    if(req.readyState !==4) return;
-  };
   req.send(params);
-}
+};
 
 
 window.pushCallbacks = {
@@ -40,7 +37,7 @@ pushCallbacks.APN = {
     }
 
     if(event.badge) {
-      pushNotification.setApplicationIconBadgeNumber(pushCallbacks.successHandler, event.badge);
+      pushNotification.setApplicationIconBadgeNumber(pushCallbacks.successHandler, pushCallbacks.errorHandler, event.badge);
     }
   },
   
