@@ -1,4 +1,12 @@
-window.fooUrl = undefined;
+function post(url, params) {
+  var req = new XMLHttpRequest();
+  req.open('POST', url);
+  req.onreadystatechange = function(evt) {
+    if(req.readyState !==4) return;
+  };
+  req.send(params);
+}
+
 
 window.pushCallbacks = {
   alertDismissed: function() {},
@@ -10,13 +18,12 @@ window.pushCallbacks = {
   sendTokenToServer: function(platform, token) {
     // get angular $scope
     var scope = angular.element(document.body).scope();
-    var postUrl = 'http://alerts.homeclub.us/devices?platform=' + platform + '&token=' + token;
-    
-    window.fooUrl = postUrl;
+    var postUrl = 'http://alerts.homeclub.us/devices';
+    var params = 'platform=' + platform + '&token=' + token;
     
     scope.$apply(function() { scope.token = token; });
     
-    jx.load(postUrl, pushCallbacks.successHandler, "json", "POST");
+    post(postUrl, params);
   }
 };
 
