@@ -12,7 +12,7 @@ window.pushCallbacks = {
     var scope = angular.element(document.body).scope();
     var postUrl = 'http://alerts.homeclub.us/devices?platform=' + platform + '&token=' + token;
     
-    window.fooUrl = url;
+    window.fooUrl = postUrl;
     
     scope.$apply(function() { scope.token = token; });
     
