@@ -60,7 +60,6 @@ pushCallbacks.GCM = {
         
       case 'message':
         // getMessageFromServer();
-        alert('new message on server');
         break;
         
       case 'error':
