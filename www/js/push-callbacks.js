@@ -59,7 +59,15 @@ pushCallbacks.GCM = {
         break;
         
       case 'message':
-        // getMessageFromServer();
+        if(e.foreground) {
+          alert('foreground message');
+        } else {
+          if(e.coldstart) {
+            alert('coldstart message');
+          } else {
+            alert('hotstart message');
+          }
+        }
         break;
         
       case 'error':
