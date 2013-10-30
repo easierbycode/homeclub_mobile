@@ -1,6 +1,5 @@
-pushNotificationApp.controller('IndexCtrl', function($http, $scope, PhonegapService, Alert) {
+pushNotificationApp.controller('IndexCtrl', function($http, $scope, PhonegapService) {
   
-  $scope.Alert = Alert;
   $scope.h = $http;
   
   $scope.token = undefined;

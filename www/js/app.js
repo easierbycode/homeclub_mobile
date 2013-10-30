@@ -1,1 +1,1 @@
-window.pushNotificationApp = angular.module('pushNotificationApp', ['ngResource']);
+window.pushNotificationApp = angular.module('pushNotificationApp', []);
