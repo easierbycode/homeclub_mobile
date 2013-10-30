@@ -1,10 +1,10 @@
-pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, AllAlerts) {
+pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Alert) {
 
   PhonegapService.ready.then(function() {
     
     pushNotification = window.plugins.pushNotification;
     
-    $scope.alerts = AllAlerts;
+    $scope.alerts = Alert.all();
     $scope.token = localStorage.getItem('token');
     
     if(! $scope.token) {
