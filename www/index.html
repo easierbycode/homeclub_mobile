@@ -27,20 +27,11 @@
         <title>Hello World</title>
     </head>
     <body ng-app='pushNotificationApp' ng-controller='IndexCtrl'>
-        <div class="app" ng-hide='alertsLoaded'>
+        <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
                 <p class="event" ng-class='{received: token, listening: !token}'>{{ token }}</p>
             </div>
-        </div>
-        
-        <div class="topcoat-list" ng-show='alertsLoaded'>
-          <h3 class="topcoat-list__header">Alerts</h3>
-          <ul class="topcoat-list__container">
-            <li class="topcoat-list__item" ng-repeat='alert in alerts'>
-              {{ alert.text }}
-            </li>
-          </ul>
         </div>
         <script type='text/javascript' src='lib/angular.js'></script>
         <script type='text/javascript' src='lib/angular-resource.js'></script>

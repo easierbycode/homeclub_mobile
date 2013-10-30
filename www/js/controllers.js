@@ -1,13 +1,6 @@
 pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Alert) {
   
-  $scope.fooAlert = Alert;
-  
-  $scope.alerts = [];
-  $scope.alertsLoaded = false;
-  
-  $scope.alerts = Alert.query(function() {
-    $scope.alertsLoaded = true;
-  });
+  $scope.Alert = Alert;
   
   $scope.token = undefined;
 
