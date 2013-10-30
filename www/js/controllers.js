@@ -1,5 +1,6 @@
 pushNotificationApp.controller('IndexCtrl', function($http, $scope, PhonegapService) {
-  
+
+  $scope.alerts = [];  
   $scope.h = $http;
   
   $scope.token = undefined;

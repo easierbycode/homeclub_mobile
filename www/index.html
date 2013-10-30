@@ -31,6 +31,9 @@
             <div id="deviceready" class="blink">
                 <p class="event" ng-class='{received: token, listening: !token}'>{{ token }}</p>
             </div>
+            <ul>
+              <li ng-repeat='alert in alerts'>{{ alert.text }}</li>
+            </ul>
         </div>
         <script type='text/javascript' src='lib/angular.js'></script>
         <script type='text/javascript' src='lib/angular-resource.js'></script>

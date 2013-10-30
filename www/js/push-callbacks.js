@@ -4,6 +4,21 @@ function post(url, params) {
   req.send(params);
 };
 
+function get(url, params, cb) {
+  var req = new XMLHttpRequest();
+  req.open('GET', url, true);
+  req.onreadystatechange = function (e) {
+    if (req.readyState != 4) return;
+
+    if(req.status == 200)
+      cb(null, req.responseText);
+    else
+      cb("Error loading page");
+
+  };
+  req.send(params);
+}
+
 
 window.pushCallbacks = {
   alertDismissed: function() {},
@@ -14,13 +29,22 @@ window.pushCallbacks = {
   
   sendTokenToServer: function(platform, token) {
     // get angular $scope
-    var scope = angular.element(document.body).scope();
+    // var scope = angular.element(document.body).scope();
     var postUrl = 'http://alerts.homeclub.us/devices';
     var params = 'platform=' + platform + '&token=' + token;
     
-    scope.$apply(function() { scope.token = token; });
+    // scope.$apply(function() { scope.token = token; });
     
     post(postUrl, params);
+    
+    get('http://alerts.homeclub.us/alerts', null, function(err, resp) {
+      var scope = angular.element(document.body).scope();
+      
+      scope.$apply(function() {
+        scope.token = token;
+        scope.alerts = JSON.parse(resp);
+      })
+    })
   }
 };
 
