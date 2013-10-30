@@ -23,14 +23,24 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/topcoat-mobile-light.css" />
         <title>Hello World</title>
     </head>
     <body ng-app='pushNotificationApp' ng-controller='IndexCtrl'>
-        <div class="app">
+        <div class="app" ng-hide='alertsLoaded'>
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
                 <p class="event" ng-class='{received: token, listening: !token}'>{{ token }}</p>
             </div>
+        </div>
+        
+        <div class="topcoat-list" ng-show='alertsLoaded'>
+          <h3 class="topcoat-list__header">Alerts</h3>
+          <ul class="topcoat-list__container">
+            <li class="topcoat-list__item" ng-repeat='alert in alerts'>
+              {{ alert.text }}
+            </li>
+          </ul>
         </div>
         <script type='text/javascript' src='lib/angular.js'></script>
         <script type='text/javascript' src='lib/angular-resource.js'></script>
@@ -38,6 +48,7 @@
         <script type="text/javascript" src="PushNotification.js"></script>
         <script type="text/javascript" src="js/push-callbacks.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/models.js"></script>
         <script type="text/javascript" src="js/services.js"></script>
         <script type="text/javascript" src="js/controllers.js"></script>
     </body>

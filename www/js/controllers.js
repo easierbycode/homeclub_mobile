@@ -1,10 +1,15 @@
-pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService) {
+pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Alert) {
+  
+  $scope.fooAlert = Alert;
+  
+  $scope.alerts = [];
+  $scope.alertsLoaded = false;
+  
+  $scope.alerts = Alert.query(function() {
+    $scope.alertsLoaded = true;
+  });
   
   $scope.token = undefined;
-  
-  $scope.createDevice = function(deviceAttrs) {
-    alert(JSON.stringify(deviceAttrs));
-  };
 
   PhonegapService.ready.then(function() {
     
