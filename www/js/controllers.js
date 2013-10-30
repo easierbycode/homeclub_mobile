@@ -4,7 +4,10 @@ pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Al
     
     pushNotification = window.plugins.pushNotification;
     
-    $scope.alerts = Alert.all();
+    Alert.all().then(function(alerts) {
+      $scope.alerts = alerts;
+    });
+    
     $scope.token = localStorage.getItem('token');
     
     if(! $scope.token) {
