@@ -1,10 +1,10 @@
-pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService) {
+pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, AllAlerts) {
 
   PhonegapService.ready.then(function() {
     
     pushNotification = window.plugins.pushNotification;
     
-    $scope.alerts = [];
+    $scope.alerts = AllAlerts;
     $scope.token = localStorage.getItem('token');
     
     if(! $scope.token) {
@@ -36,11 +36,6 @@ pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService) {
           }
         )
       }
-    }
     
-    get('http://alerts.homeclub.us/alerts', null, function(err, resp) {
-      if(err) return;
-      $scope.$apply(function() { $scope.alerts = JSON.parse(resp); });
-    });
   });
 });
