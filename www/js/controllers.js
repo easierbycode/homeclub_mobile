@@ -40,7 +40,7 @@ pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService) {
     
     get('http://alerts.homeclub.us/alerts', null, function(err, resp) {
       if(err) return;
-      $scope.alerts = JSON.parse(resp);
+      $scope.$apply(function() { $scope.alerts = JSON.parse(resp); });
     });
   });
 });
