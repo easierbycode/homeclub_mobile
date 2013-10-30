@@ -36,6 +36,6 @@ pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Al
           }
         )
       }
-    
+    }
   });
 });
