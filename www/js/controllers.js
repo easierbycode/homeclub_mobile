@@ -1,44 +1,15 @@
-pushNotificationApp.controller('IndexCtrl', function($scope, PhonegapService, Alert) {
+hc.controller('AlertCtrl', function($scope, Alert) {
+  Alert.all().then(function(alerts) {
+    $scope.alertsGroupedByRoom = _.groupBy(data, 'room');
+  });
+});
 
-  PhonegapService.ready.then(function() {
-    
-    pushNotification = window.plugins.pushNotification;
-    
-    Alert.all().then(function(alerts) {
-      $scope.alerts = alerts;
-    });
-    
-    $scope.token = localStorage.getItem('token');
-    
-    if(! $scope.token) {
 
-      if(device.platform == 'iOS') {
-        
-        $scope.token = 'Requesting APNS token';
-        
-        pushNotification.register(
-          pushCallbacks.APN.successfulRegistration,
-          pushCallbacks.errorHandler,
-          {
-            "badge":"true",
-            "sound":"true",
-            "alert":"true",
-            "ecb":"pushCallbacks.APN.onNotification"
-          }
-        )
-      } else {
-        
-        $scope.token = 'Requesting GCM token';
-        
-        pushNotification.register(
-          pushCallbacks.GCM.successfulRegistration,
-          pushCallbacks.errorHandler,
-          {
-            "senderID":"125902103424",
-            "ecb":"pushCallbacks.GCM.onNotification"
-          }
-        )
-      }
-    }
+hc.controller('DashboardCtrl', function($scope, Alert) {
+  var pusher  = new Pusher("f513119581ede36ac6c4")
+  var debug   = pusher.subscribe("debug");
+
+  debug.bind('message', function(message) {
+    $scope.$apply(function(){ $scope.latestTemp = message.temp.toFixed(1) });
   });
 });

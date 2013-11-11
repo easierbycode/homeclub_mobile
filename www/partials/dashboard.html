@@ -1,0 +1,165 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet" href="" ng-click="back()">
+            <i class="icon-arrow-left grey"></i>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">Dashboard</h1>
+    </div>
+</div>
+
+<ul id='dashboard-list' class="topcoat-list">
+    <li class="topcoat-list__header">
+        <div class='full'>
+            <div>
+                Basement
+                <br>
+
+                <i class="icon-connection dk-blue"></i> connected
+            </div>
+            <div class='pull-right'>
+
+                <i class="icon-battery-half yellow"></i>
+                <i class="icon-battery-full green"></i>
+                <br>3 Sensors
+            </div>
+        </div>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr"><i class="icon-droplet dk-blue"></i>
+                </div>
+                <div><b>Water</b>  <span class="subtext">OK</span>
+                </div>
+
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr"><i class="icon-temperature dk-blue"></i>
+                </div>
+
+                <div>
+                    <b>Temp</b>
+
+                    <span>{{ latestTemp }}<i class="icon-Fahrenheit"></i></span>
+                </div>
+
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr">
+                    <i class="icon-lamp2 dk-blue"></i>
+                </div>
+                <div>
+                    <b>Light</b>  <span class="subtext">On</span>
+                </div>
+
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+    <li class="topcoat-list__header">
+        <div class='full'>
+            <div>
+                Living Room
+                <br>
+
+                <i class="icon-connection dk-blue"></i> connected
+            </div>
+            <div class='pull-right'>
+
+
+                <i class="icon-battery-empty red"></i>
+                <i class="icon-battery-full green"></i>
+                <i class="icon-battery-full green"></i>
+                <i class="icon-battery-full green"></i>
+
+                <br>4 Sensors
+
+
+            </div>
+        </div>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr">
+                    <i class="icon-windy dk-blue"></i>
+                </div>
+
+                <div>
+                    <b>Air Quality</b>  <span class="subtext">OK</span>
+
+
+                    <span>47</span>
+                </div>
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr">
+                    <i class="icon-power-cord dk-blue"></i>
+                </div>
+                <div>
+                    <b>Electricity</b>  <span class="subtext">Fridge</span>
+
+                    <span>8 watts</i></span>
+                </div>
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr">
+                    <i class="icon-skull dk-blue"></i>
+                </div>
+                <div>
+                    <b>CO&#178;</b>  <span class="subtext">OK</span>
+
+
+                    <span>5 ppm</span>
+                </div>
+
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+
+
+    <li class="topcoat-list__item">
+        <a href="#">
+            <div class='full'>
+                <div class="icon-wrpr">
+                    <i class="icon-video dk-blue"></i>
+                </div>
+                <div>
+                    <b>Motion Sensor</b>  <span class="subtext">OK</span>
+                </div>
+
+                <i class="icon-chevron-right pull-right"></i>
+            </div>
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,24 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item left quarter">
+        <a class="topcoat-icon-button--quiet" href="" ng-click="back()">
+            <i class="icon-arrow-left grey"></i>
+        </a>
+    </div>
+    <div class="topcoat-navigation-bar__item center half">
+        <h1 class="topcoat-navigation-bar__title">Alerts</h1>
+    </div>
+</div>
+
+
+<div class="ng-cloak" ng-repeat='(room, alerts) in alertsGroupedByRoom'>
+  <ul class="topcoat-list">
+  
+    <li class="topcoat-list__header">
+      {{ room }}
+    </li>
+  
+    <li class="topcoat-list__item" ng-repeat="alert in alerts | orderBy:'-updateTime'">
+      <span class='subtext'>{{ alert.updateTime | date:'MMM d h:mm a' }}</span> <b>{{ alert.type }} is {{ alert.measurement }} {{ alert.unit }}</b>
+    </li>
+  </ul>
+</div>

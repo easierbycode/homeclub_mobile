@@ -1,4 +1,4 @@
-pushNotificationApp.service('PhonegapService', function($document, $q) {
+hc.service('PhonegapService', function($document, $q) {
   var d = $q.defer();
   
   this.ready = d.promise;

@@ -6,12 +6,8 @@ window.pushCallbacks = {
   errorHandler: function(error) { alert('error: ' + error) },
   
   sendTokenToServer: function(platform, token) {
-    // get angular $scope
-    var scope = angular.element(document.body).scope();
     var postUrl = 'http://alerts.homeclub.us/devices';
     var params = 'platform=' + platform + '&token=' + token;
-    
-    scope.$apply(function() { scope.token = token; });
     
     post(postUrl, params);
     

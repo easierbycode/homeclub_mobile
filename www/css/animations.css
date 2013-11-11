@@ -1,0 +1,200 @@
+.bounceInLeft.ng-enter {
+  -webkit-animation: bounceInLeft 0.5s linear; /* Safari/Chrome */
+  -moz-animation: bounceInLeft 0.5s linear; /* Firefox */
+  -o-animation: bounceInLeft 0.5s linear; /* Opera */
+  animation: bounceInLeft 0.5s linear; /* IE10+ and Future Browsers */
+}
+
+.bounceInRight.ng-enter {
+  -webkit-animation: bounceInRight 0.5s linear; /* Safari/Chrome */
+  -moz-animation: bounceInRight 0.5s linear; /* Firefox */
+  -o-animation: bounceInRight 0.5s linear; /* Opera */
+  animation: bounceInRight 0.5s linear; /* IE10+ and Future Browsers */
+}
+
+.fade-in.ng-enter {
+  -webkit-animation: fade-in 0.5s linear; /* Safari/Chrome */
+  -moz-animation: fade-in 0.5s linear; /* Firefox */
+  -o-animation: fade-in 0.5s linear; /* Opera */
+  animation: fade-in 0.5s linear; /* IE10+ and Future Browsers */  
+}
+
+@-webkit-keyframes bounceInLeft {
+        0% {
+                opacity: 0;
+                -webkit-transform: translateX(-2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -webkit-transform: translateX(30px);
+        }
+
+        80% {
+                -webkit-transform: translateX(-10px);
+        }
+
+        100% {
+                -webkit-transform: translateX(0);
+        }
+}
+
+@-moz-keyframes bounceInLeft {
+        0% {
+                opacity: 0;
+                -moz-transform: translateX(-2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -moz-transform: translateX(30px);
+        }
+
+        80% {
+                -moz-transform: translateX(-10px);
+        }
+
+        100% {
+                -moz-transform: translateX(0);
+        }
+}
+
+@-o-keyframes bounceInLeft {
+        0% {
+                opacity: 0;
+                -o-transform: translateX(-2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -o-transform: translateX(30px);
+        }
+
+        80% {
+                -o-transform: translateX(-10px);
+        }
+
+        100% {
+                -o-transform: translateX(0);
+        }
+}
+
+@keyframes bounceInLeft {
+        0% {
+                opacity: 0;
+                transform: translateX(-2000px);
+        }
+
+        60% {
+                opacity: 1;
+                transform: translateX(30px);
+        }
+
+        80% {
+                transform: translateX(-10px);
+        }
+
+        100% {
+                transform: translateX(0);
+        }
+}
+
+@-webkit-keyframes bounceInRight {
+        0% {
+                opacity: 0;
+                -webkit-transform: translateX(2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -webkit-transform: translateX(-30px);
+        }
+
+        80% {
+                -webkit-transform: translateX(10px);
+        }
+
+        100% {
+                -webkit-transform: translateX(0);
+        }
+}
+
+@-moz-keyframes bounceInRight {
+        0% {
+                opacity: 0;
+                -moz-transform: translateX(2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -moz-transform: translateX(-30px);
+        }
+
+        80% {
+                -moz-transform: translateX(10px);
+        }
+
+        100% {
+                -moz-transform: translateX(0);
+        }
+}
+
+@-o-keyframes bounceInRight {
+        0% {
+                opacity: 0;
+                -o-transform: translateX(2000px);
+        }
+
+        60% {
+                opacity: 1;
+                -o-transform: translateX(-30px);
+        }
+
+        80% {
+                -o-transform: translateX(10px);
+        }
+
+        100% {
+                -o-transform: translateX(0);
+        }
+}
+
+@keyframes bounceInRight {
+        0% {
+                opacity: 0;
+                transform: translateX(2000px);
+        }
+
+        60% {
+                opacity: 1;
+                transform: translateX(-30px);
+        }
+
+        80% {
+                transform: translateX(10px);
+        }
+
+        100% {
+                transform: translateX(0);
+        }
+}
+
+@-webkit-keyframes fade-in {
+        0%    { opacity:0 }
+        100%  { opacity:1 }
+}
+
+@-moz-keyframes fade-in {
+        0%    { opacity:0 }
+        100%  { opacity:1 }
+}
+
+@-o-keyframes fade-in {
+        0%    { opacity:0 }
+        100%  { opacity:1 }
+}
+
+@keyframes fade-in {
+        0%    { opacity:0 }
+        100%  { opacity:1 }
+}
